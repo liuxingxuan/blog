@@ -1,15 +1,15 @@
 server:
   port: 9001
 
-  #服务名，只能是横岗，不能是下划线
+
 spring:
   application:
-    name: myblog-base
+    name: myblog-base #服务名，只能是横岗，不能是下划线
 
 datasource:
   driverClassName: com.mysql.jdbc.Driver
-  url: jdbc:mysql://192.168.92.133:3306/myblog_base?
-  characterEncoding=utf‐8
+  url: jdbc:mysql://192.168.92.133:3306//tensquare_base?
+  characterEncoding=utf-8
   username: root
   password: root
 

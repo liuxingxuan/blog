@@ -1,9 +1,9 @@
 package io.myblog.base;
 
-import com.tensquare.common.utils.IdWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import util.IdWorker;
 
 @SpringBootApplication
 public class BaseApplication {
