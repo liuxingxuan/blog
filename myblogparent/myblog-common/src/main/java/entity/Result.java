@@ -1,7 +1,7 @@
 package entity;
 
 public class Result {
-    private boolean flag;
+    private boolean flag;//成功与否
     private Integer code;
     private String message;
     private Object data;
