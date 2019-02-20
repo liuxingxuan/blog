@@ -3,10 +3,16 @@ package io.myblog.base.service;
 import io.myblog.base.dao.LabelDao;
 import io.myblog.base.pojo.Label;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,4 +53,29 @@ public class LabelService {
         labelDao.deleteById(id);
     }
 
+    public List<Label> findSearch(Label label) {
+        return labelDao.findAll(new Specification<Label>(){
+            @Override
+            public Predicate toPredicate(Root<Label> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                //new 集合来存储条件
+                List<Predicate> list = new ArrayList<>();
+                if(label.getLabelname() != null && !"".equals(label.getLabelname())){
+                    //where labelname like "%小明%"
+                    Predicate predicate = cb.like(root.get("labelname").as(String.class), "%" + label.getLabelname() + "%");
+                    list.add(predicate);
+                }
+                if(label.getState() != null && !"".equals(label.getState())){
+                    //state = "1"
+                    Predicate predicate = cb.like(root.get("state").as(String.class), label.getState());
+                    list.add(predicate);
+                }
+                //new 数组作为最终返回条件
+                Predicate[] pred = new Predicate[list.size()];
+                //list转为数组
+                pred = list.toArray(pred);
+                //where labelname like "%小明%" and state = "1"
+                return cb.and();
+            }
+        });
+    }
 }

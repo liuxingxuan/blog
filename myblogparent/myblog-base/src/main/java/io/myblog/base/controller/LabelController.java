@@ -7,6 +7,8 @@ import io.myblog.base.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/label")
@@ -44,7 +46,11 @@ public class LabelController {
         return new Result(true,StatusCode.OK,"删除成功");
     }
 
-
+   @GetMapping("/findSearch")
+    public Result findSearch(@RequestBody Label label){
+        List<Label> list = labelService.findSearch(label);
+        return new Result(true,StatusCode.OK,"查询成功");
+   }
 
 
 
