@@ -12,8 +12,6 @@
         <module>myblog-common</module>
         <module>myblog-base</module>
     </modules>
-    <name>tensquare_parent</name>
-    <description>十次方项目-黑马程序员</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

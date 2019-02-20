@@ -3,14 +3,14 @@ package io.myblog.base.service;
 import io.myblog.base.dao.LabelDao;
 import io.myblog.base.pojo.Label;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
 import java.util.List;
 
 @Service
-@EnableAutoConfiguration
+@Transactional
 public class LabelService {
     @Autowired
     private LabelDao labelDao;
@@ -35,7 +35,7 @@ public class LabelService {
         return labelDao.findById(id).get();
     }
 
-    public void add(Label label){
+    public void save(Label label){
         label.setId(idWorker.nextId()+" ");//设置ID
         labelDao.save(label);
     }
