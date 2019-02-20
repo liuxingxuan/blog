@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>myblog-common</module>
+        <module>myblog-base</module>
     </modules>
     <name>tensquare_parent</name>
     <description>十次方项目-黑马程序员</description>
