@@ -4,12 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.myblog.recruit.pojo.Recruit;
 import io.myblog.recruit.service.RecruitService;
@@ -30,7 +25,17 @@ public class RecruitController {
 	@Autowired
 	private RecruitService recruitService;
 	
-	
+	@GetMapping("/recommend")
+	public Result recommend(){
+		return new Result(true,StatusCode.OK,"查询成功",recruitService.recommand());
+	}
+
+
+	@GetMapping("/newlist")
+	public Result newlist(){
+		return new Result(true,StatusCode.OK,"查询成功",recruitService.newList());
+	}
+
 	/**
 	 * 查询全部数据
 	 * @return
