@@ -11,6 +11,7 @@
     <modules>
         <module>myblog-common</module>
         <module>myblog-base</module>
+        <module>tensquare_recruit</module>
     </modules>
 
     <parent>

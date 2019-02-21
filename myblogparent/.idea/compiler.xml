@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="myblog-common" />
         <module name="myblogbase" />
+        <module name="tensquare_recruit" />
       </profile>
     </annotationProcessing>
   </component>
