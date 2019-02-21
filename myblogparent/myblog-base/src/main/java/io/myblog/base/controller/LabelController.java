@@ -1,10 +1,14 @@
 package io.myblog.base.controller;
 
+import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
 import io.myblog.base.pojo.Label;
 import io.myblog.base.service.LabelService;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,10 +53,14 @@ public class LabelController {
    @GetMapping("/findSearch")
     public Result findSearch(@RequestBody Label label){
         List<Label> list = labelService.findSearch(label);
-        return new Result(true,StatusCode.OK,"查询成功");
+        return new Result(true,StatusCode.OK,"查询成功",list);
    }
 
-
+    @GetMapping("/pageQuery")
+    public Result pageQuery(@RequestBody Label label,@RequestParam int page,@RequestParam int size){
+        Page<Label> pageData = labelService.pageQuery(label,page,size);
+        return new Result(true,StatusCode.OK,"查询成功",new PageResult<Label>(pageData.getTotalElements(),pageData.getContent()));
+    }
 
 
 }
