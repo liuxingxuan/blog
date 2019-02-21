@@ -39,6 +39,10 @@ public class EnterpriseService {
 	@Autowired
 	private IdWorker idWorker;
 
+	public List<Enterprise> findByIshot(String ishot){
+		return enterpriseDao.findByIshot(ishot);
+	}
+
 	/**
 	 * 查询全部列表
 	 * @return

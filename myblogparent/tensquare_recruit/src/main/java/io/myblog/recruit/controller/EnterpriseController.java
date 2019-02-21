@@ -4,12 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.myblog.recruit.pojo.Enterprise;
 import io.myblog.recruit.service.EnterpriseService;
@@ -29,8 +24,18 @@ public class EnterpriseController {
 
 	@Autowired
 	private EnterpriseService enterpriseService;
-	
-	
+
+
+	/**
+	 * 根据是否热门查找热门企业即 ishot = 1
+	 * @param ishot
+	 * @return
+	 */
+	@GetMapping("/findByIshot")
+	public Result findByIshot(String ishot){
+		List<Enterprise> list = enterpriseService.findByIshot(ishot);
+		return new Result(true,StatusCode.OK,"查询成功",list);
+	}
 	/**
 	 * 查询全部数据
 	 * @return
