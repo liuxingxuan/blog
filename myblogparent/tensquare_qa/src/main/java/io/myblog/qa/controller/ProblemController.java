@@ -1,15 +1,9 @@
 package io.myblog.qa.controller;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.myblog.qa.pojo.Problem;
 import io.myblog.qa.service.ProblemService;
@@ -29,7 +23,56 @@ public class ProblemController {
 
 	@Autowired
 	private ProblemService problemService;
-	
+
+	/**
+	 * 最新回答问题列表
+	 * @param labelid
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@GetMapping("/newlist")
+	public Result newlist(@RequestParam("labelid") String labelid,
+						  @RequestParam("page") int page,
+						  @RequestParam("rows") int rows){
+		Page<Problem> pageData = problemService.newlist(labelid,page,rows);
+		return new Result(true,StatusCode.OK,"查询成功",
+				new PageResult<Problem>(pageData.getTotalElements(),pageData.getContent()));
+
+	}
+
+	/**
+	 * 热门回答问题列表
+	 * @param labelid
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@GetMapping("/hotlist")
+	public Result hotlist(@RequestParam("labelid") String labelid,
+						  @RequestParam("page") int page,
+						  @RequestParam("rows") int rows){
+		Page<Problem> pageData = problemService.hotlist(labelid,page,rows);
+		return new Result(true,StatusCode.OK,"查询成功",
+				new PageResult<Problem>(pageData.getTotalElements(),pageData.getContent()));
+	}
+
+	/**
+	 * 等待回答问题列表
+	 * @param labelid
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@GetMapping("/waitlist")
+	public Result waitlist(@RequestParam("labelid") String labelid,
+						  @RequestParam("page") int page,
+						  @RequestParam("rows") int rows){
+		Page<Problem> pageData = problemService.waitlist(labelid,page,rows);
+		return new Result(true,StatusCode.OK,"查询成功",
+				new PageResult<Problem>(pageData.getTotalElements(),pageData.getContent()));
+	}
+
 	
 	/**
 	 * 查询全部数据
